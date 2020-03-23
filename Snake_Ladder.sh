@@ -59,3 +59,7 @@ else
 	echo "You are at $player_1 possition"
 fi
 done
+<<<<<<< HEAD
+=======
+echo "!!!!!!!You win the Game!!!!!!!!!!"
+>>>>>>> UC4_Winning_100
