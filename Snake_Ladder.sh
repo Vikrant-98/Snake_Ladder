@@ -59,4 +59,4 @@ else
 	echo "You are at $player_1 possition"
 fi
 done
- echo "!!!!!!!You win the Game!!!!!!!!!"
+echo "!!!!!!!You win the Game!!!!!!!!!!"
