@@ -5,9 +5,9 @@ player_1=0
 while [ $player_1 != 100 ]
 do
 read -p "Enter 1 to role the die " input
-if [[ $input == 1 ]]
+die=$(($((RANDOM%6))+1))
+if [[ $input -eq 1 && $(($player_1+$die)) -le 100 ]]
 then
-die=$(($((RANDOM%6))+1
 player_1=$(($player_1+$die))
 case $player_1 in
 
@@ -59,5 +59,4 @@ else
 	echo "You are at $player_1 possition"
 fi
 done
-
-echo "!!!!!!!You win the Game!!!!!!!!!!"
+echo "!!!!!!!!You win the Game!!!!!!!!!!"
