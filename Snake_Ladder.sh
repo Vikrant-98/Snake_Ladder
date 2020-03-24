@@ -1,66 +1,101 @@
 #!/bin/bash -x
 
 Start_Position=0
-player_1=0
-count=0
-while [ $player_1 != 100 ]
+player=0
+player_1=$Start_Position
+player_2=$Start_Position
+count_1=0
+count_2=0
+turn=0
+while [ $player != 100 ]
 do
+if [ $turn == 0 ]
+then
+	player=$player_1
+	((turn++))
+elif [ $turn == 1 ]
+then
+	player=$player_2
+	((turn--))
+fi
 read -p "Enter 1 to role the die " input
 die=$(($((RANDOM%6))+1))
-((count++))
-if [[ $input -eq 1 && $(($player_1+$die)) -le 100 ]]
+if [ $turn == 1 ]
 then
-echo "Player is at $player_1"
-player_1=$(($player_1+$die))
-case $player_1 in
+	((count_1++))
+elif [ $turn == 0 ]
+then
+	((count_2++))
+fi
+if [[ $input -eq 1 && $(($player+$die)) -le 100 ]]
+then
+echo "Player is at $player"
+player=$(($player+$die))
+case $player in
 
 	3)
-		player_1=51	#ladder
+		player=51	#ladder
 		;;
 	6)
-                player_1=27	#ladder
+                player=27	#ladder
                 ;;
 	20)
-                player_1=70	#ladder
+                player=70	#ladder
                 ;;
 	36)
-                player_1=55	#ladder
+                player=55	#ladder
                 ;;
 	63)
-                player_1=95	#ladder
+                player=95	#ladder
                 ;;
 	68)
-                player_1=98	#ladder
+                player=98	#ladder
                 ;;
 	25)
-                player_1=5	#snake
+                player=5	#snake
                 ;;
         34)
-                player_1=1	#snake
+                player=1	#snake
                 ;;
         47)
-                player_1=19	#snake
+                player=19	#snake
                 ;;
         65)
-                player_1=52	#snake
+                player=52	#snake
                 ;;
         87)
-                player_1=57	#snake
+                player=57	#snake
                 ;;
         91)
-                player_1=61	#snake
+                player=61	#snake
                 ;;
 	99)
-		player_1=69	#snake
+		player=69	#snake
 		;;
 	*)
 		;;
 
 esac
 
+if [ $turn == 1 ]
+then
+        player_1=$player
+elif [ $turn == 0 ]
+then
+        player_2=$player
+fi
+
 else
-	echo "You are at $player_1 possition"
+	echo "You are at $player possition"
 fi
 done
-echo "!!!!!!!You win the Game!!!!!!!!!"
-echo "Total $count time chance needed to win the game"
+if [ $player_1 == 100 ]
+then
+        echo "!!!!!!!Player_1 win the Game!!!!!!!!!"
+	echo "Total $count_1 time chance needed to win the game"
+elif [ $player_2 == 100 ]
+then
+        echo "!!!!!!!Player_2 win the Game!!!!!!!!!"
+	echo "Total $count_2 time chance needed to win the game"
+
+fi
